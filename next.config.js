@@ -1,13 +1,3 @@
-// const { withContentlayer } = require("next-contentlayer");
-
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   reactStrictMode: true,
-//   swcMinify: true,
-// };
-
-// module.exports = withContentlayer(nextConfig);
-
 const { withContentlayer } = require('next-contentlayer');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
