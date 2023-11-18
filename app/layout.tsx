@@ -1,9 +1,10 @@
-import Link from 'next/link'
-import './globals.css'
+//import './globals.css'
+import 'css/tailwind.css'
+import 'pliny/search/algolia.css'
+
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { ModeToggle } from '@/components/mode-toggle'
 import SectionContainer from '@/components/SectionContainer'
 import { SearchConfig, SearchProvider } from 'pliny/search'
 import Header from '@/components/Header'
