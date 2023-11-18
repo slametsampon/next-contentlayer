@@ -8,7 +8,8 @@
     "preview": "next build && next start",
     "start": "next start",
     "analyze": "cross-env ANALYZE=true next build",
-    "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts --dir all-configs"
+    "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts --dir data",
+    "lintAll": "next lint --fix --dir ."
   },
   "dependencies": {
     "@next/bundle-analyzer": "13.4.19",

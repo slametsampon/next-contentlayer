@@ -7,12 +7,12 @@ const siteMetadata = {
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://agro-mulya.vercel.app',
-  siteRepo: 'https://github.com/slametsampon/agro-mulya',
+  siteRepo: 'https://github.com/slametsampon/next-contentlayer',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'address@yoursite.com',
-  github: 'https://github.com/slametsampon/agro-mulya',
+  github: 'https://github.com/slametsampon/next-contentlayer',
   twitter: 'https://twitter.com/Twitter',
   facebook: 'https://facebook.com',
   youtube: 'https://youtube.com',
@@ -86,6 +86,6 @@ const siteMetadata = {
     //   indexName: 'docsearch',
     // },
   },
-};
+}
 
-module.exports = siteMetadata;
+module.exports = siteMetadata
