@@ -42,39 +42,6 @@ const computedFields: ComputedFields = {
   toc: { type: 'string', resolve: (doc) => extractTocHeadings(doc.body.raw) },
 }
 
-/**
- * Count the occurrences of all tags across blog posts and write to json file
- */
-function createTagCount(allBlogs) {
-  const tagCount: Record<string, number> = {}
-  allBlogs.forEach((file) => {
-    if (file.tags && (!isProduction || file.draft !== true)) {
-      file.tags.forEach((tag) => {
-        const formattedTag = GithubSlugger.slug(tag)
-        if (formattedTag in tagCount) {
-          tagCount[formattedTag] += 1
-        } else {
-          tagCount[formattedTag] = 1
-        }
-      })
-    }
-  })
-  writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
-}
-
-function createSearchIndex(allBlogs) {
-  if (
-    siteMetadata?.search?.provider === 'kbar' &&
-    siteMetadata.search.kbarConfig.searchDocumentsPath
-  ) {
-    writeFileSync(
-      `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs)))
-    )
-    console.log('Local search index generated...')
-  }
-}
-
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: 'blog/**/*.mdx',
@@ -128,18 +95,6 @@ export const Authors = defineDocumentType(() => ({
   },
   computedFields,
 }))
-
-/** @type {import('contentlayer/source-files').ComputedFields} */
-const computedFields1: ComputedFields = {
-  slug: {
-    type: 'string',
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
-  },
-  slugAsParams: {
-    type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
-  },
-}
 
 export const Page = defineDocumentType(() => ({
   name: 'Page',
@@ -195,10 +150,39 @@ export const Post = defineDocumentType(() => ({
   },
 }))
 
-// export default makeSource({
-//   contentDirPath: './content',
-//   documentTypes: [Post, Page],
-// })
+/**
+ * Bagian sementafa saat build di lokal di-disable dulu karena membuat error saat building pada contentlayer
+ * Count the occurrences of all tags across blog posts and write to json file
+ */
+// function createTagCount(allBlogs) {
+//   const tagCount: Record<string, number> = {}
+//   allBlogs.forEach((file) => {
+//     if (file.tags && (!isProduction || file.draft !== true)) {
+//       file.tags.forEach((tag) => {
+//         const formattedTag = GithubSlugger.slug(tag)
+//         if (formattedTag in tagCount) {
+//           tagCount[formattedTag] += 1
+//         } else {
+//           tagCount[formattedTag] = 1
+//         }
+//       })
+//     }
+//   })
+//   writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
+// }
+
+// function createSearchIndex(allBlogs) {
+//   if (
+//     siteMetadata?.search?.provider === 'kbar' &&
+//     siteMetadata.search.kbarConfig.searchDocumentsPath
+//   ) {
+//     writeFileSync(
+//       `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
+//       JSON.stringify(allCoreContent(sortPosts(allBlogs)))
+//     )
+//     console.log('Local search index generated...')
+//   }
+// }
 
 export default makeSource({
   contentDirPath: 'content',
@@ -221,9 +205,9 @@ export default makeSource({
       rehypePresetMinify,
     ],
   },
-  onSuccess: async (importData) => {
-    const { allBlogs } = await importData()
-    createTagCount(allBlogs)
-    createSearchIndex(allBlogs)
-  },
+  // onSuccess: async (importData) => {
+  //   const { allBlogs } = await importData()
+  //   createTagCount(allBlogs)
+  //   createSearchIndex(allBlogs)
+  // },
 })
