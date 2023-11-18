@@ -1,5 +1,4 @@
 import { allBlogs, allPosts } from '@/.contentlayer/generated'
-import Link from '@/components/Link'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import Main from './Main'
 
