@@ -7,12 +7,13 @@
     "build": "next build",
     "preview": "next build && next start",
     "start": "next start",
+    "preinstall": "npx npm-force-resolutions",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts --dir data",
     "lintAll": "next lint --fix --dir ."
   },
   "dependencies": {
-    "@next/bundle-analyzer": "13.4.19",
+    "@next/bundle-analyzer": "13.5.6",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "18.16.1",
@@ -20,25 +21,23 @@
     "@types/react-dom": "18.2.1",
     "@vercel/analytics": "^1.0.0",
     "autoprefixer": "10.4.14",
-    "contentlayer": "^0.3.2",
-    "eslint": "8.39.0",
-    "eslint-config-next": "13.3.1",
+    "contentlayer": "^0.3.4",
     "github-slugger": "^2.0.0",
-    "next": "^13.5.6",
-    "next-contentlayer": "^0.3.2",
+    "next": "13.5.6",
+    "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
-    "pliny": "^0.1.5",
+    "pliny": "^0.4.1",
     "postcss": "^8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^6.1.0",
-    "rehype-citation": "^1.0.2",
+    "rehype-citation": "^1.0.3",
     "rehype-katex": "^6.0.3",
-    "rehype-preset-minify": "6.0.0",
-    "rehype-prism-plus": "^1.6.0",
+    "rehype-preset-minify": "^6.0.0",
+    "rehype-prism-plus": "^1.6.3",
     "rehype-slug": "^5.1.0",
-    "remark": "^14.0.2",
+    "remark": "^14.0.3",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "tailwindcss": "3.3.2",
@@ -47,17 +46,16 @@
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
     "@types/mdx": "^2.0.5",
-    "@types/react": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.45.0",
-    "eslint-config-next": "13.4.19",
+    "eslint-config-next": "13.5.6",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.0",
-    "lint-staged": "^13.0.0",
-    "prettier": "^3.0.0",
+    "lint-staged": "^13.3.0",
+    "npm-force-resolutions": "^0.0.10",
+    "prettier": "2.8.8",
     "prettier-plugin-tailwindcss": "^0.4.1"
   },
   "lint-staged": {
@@ -67,5 +65,10 @@
     "*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
       "prettier --write"
     ]
+  },
+  "resolutions": {
+    "vfile": "5.3.7",
+    "vfile-message": "3.1.1",
+    "unified": "^10.1.2"
   }
 }

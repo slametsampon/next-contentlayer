@@ -1,8 +1,11 @@
+// contentlayer.config.ts
+
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
 import { writeFileSync } from 'fs'
 import readingTime from 'reading-time'
 import GithubSlugger, { slug } from 'github-slugger'
 import path from 'path'
+import { pathToFileURL } from 'url'
 import { allBlogs } from 'contentlayer/generated'
 
 // Remark packages
@@ -23,6 +26,8 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+
+
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -153,7 +158,7 @@ export const Post = defineDocumentType(() => ({
 }))
 
 function createTagCount(allBlogs) {
-  const tagCount: Record<string, number> = {}
+const tagCount: Record<string, number> = {}
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
@@ -189,7 +194,7 @@ export default makeSource({
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
-      remarkExtractFrontmatter,
+      //remarkExtractFrontmatter,
       remarkGfm,
       remarkCodeTitles,
       remarkMath,
@@ -210,9 +215,14 @@ export default makeSource({
    * Count the occurrences of all tags across blog posts and write to json file
    */
 
-  // onSuccess: async (importData) => {
-  //   const { allBlogs } = await importData()
-  //   createTagCount(allBlogs)
-  //   createSearchIndex(allBlogs)
-  // },
+onSuccess: async () => {
+  try {
+    const { allBlogs } = await import('contentlayer/generated')
+    createTagCount(allBlogs)
+    createSearchIndex(allBlogs)
+  } catch (error) {
+    console.error('Failed during onSuccess import:', error)
+  }
+}
+,
 })
